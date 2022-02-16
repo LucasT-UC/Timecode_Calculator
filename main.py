@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, pyperclip
 from time import time
 from termcolor import colored
 
@@ -56,12 +56,15 @@ def main():
         total_time = 0
         print("Copy and paste the timecode section as in the format of [0:0:0:0-0:0:0:0] [0:0:0:0-0:0:0:0]")
         timecode_section = input("Insert timecodes here: ")
+        section = timecode_section
         timecode_section = timecode_section.split(" ")
         total_time = 0
         for i in range(len(timecode_section)):
             total_time += calculator(timecode_section[i])
-        print('________________________________________________________________________')
+        pyperclip.copy(f"Please only transcribe the following section(s): {section}")
+        print('________________________________________________________________________\n')
         print(f"TOTAL DURATION: {colored(get_minutes(total_time), 'green')} minutes\n")
+        print("ITEM INFO has been copied to your clipboard\n")
         x = input('Press ENTER to return to menu [0 to exit]: ')
         if x == '0':
             alive = False
