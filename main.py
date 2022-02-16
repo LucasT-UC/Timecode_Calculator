@@ -1,11 +1,12 @@
-import sys
+import sys, os
 from time import time
+from termcolor import colored
 
+clear = lambda: os.system('cls')
+clear()
 
 def get_minutes(time):
     time /= 30
-    print(f"minutes: {time//60}")
-    print(f"seconds: {time%60}")
     if time%60 < 30:
         return int(time//60)
     else:
@@ -33,9 +34,7 @@ def calc(timecode_section):
 
 
     t1_time = total_time(h1, m1, s1, f1)
-    print(f"t1 time = {t1_time}")
     t2_time = total_time(h2, m2, s2, f2)
-    print(f"t2 time = {t2_time - t1_time}")
     return t2_time - t1_time
 
 
@@ -49,17 +48,25 @@ def total_time(h, m, s, f):
 
 
 def main():
-    print("WELCOME TO TIMECODE CALCULATOR")
-    print("---------------------------------\n")
-    total_time = 0
-    print("Copy and paste the timecode section as in the format of [0:0:0:0-0:0:0:0] [0:0:0:0-0:0:0;0]")
-    timecode_section = input("Insert timecodes here: ")
-    timecode_section = timecode_section.split(" ")
-    total_time = 0
-    for i in range(len(timecode_section)):
-        total_time += calculator(timecode_section[i])
-    print(f"TOTAL DURATION: {get_minutes(total_time)} minutes")
+    alive = True
+    while alive:
+        clear()
+        print("WELCOME TO TIMECODE CALCULATOR")
+        print("---------------------------------\n")
+        total_time = 0
+        print("Copy and paste the timecode section as in the format of [0:0:0:0-0:0:0:0] [0:0:0:0-0:0:0:0]")
+        timecode_section = input("Insert timecodes here: ")
+        timecode_section = timecode_section.split(" ")
+        total_time = 0
+        for i in range(len(timecode_section)):
+            total_time += calculator(timecode_section[i])
+        print('________________________________________________________________________')
+        print(f"TOTAL DURATION: {colored(get_minutes(total_time), 'green')} minutes\n")
+        x = input('Press ENTER to return to menu [0 to exit]: ')
+        if x == '0':
+            alive = False
 
+    
 
 
 def calculator(timecode_section):
