@@ -1,4 +1,4 @@
-import sys, os, pyperclip
+import sys, os, pyperclip, re
 from time import time
 from termcolor import colored
 
@@ -14,8 +14,8 @@ def get_minutes(time):
 
 
 def calc(timecode_section):
-    timecode_section[0] = timecode_section[0].split(":")
-    timecode_section[1] = timecode_section[1].split(":")
+    timecode_section[0] = re.findall(r"[\w']+", timecode_section[0])
+    timecode_section[1] = re.findall(r"[\w']+", timecode_section[1])
     h1 = int(timecode_section[0][0])
     m1 = int(timecode_section[0][1])
     s1 = int(timecode_section[0][2])
@@ -54,7 +54,7 @@ def main():
         print("WELCOME TO TIMECODE CALCULATOR")
         print("---------------------------------\n")
         total_time = 0
-        print("Copy and paste the timecode section as in the format of [0:0:0:0-0:0:0:0] [0:0:0:0-0:0:0:0]")
+        print("Copy and paste the timecode section as in the format of [H:M:S:F-H:M:S:F] [H:M:S:F-H:M:S:F]")
         timecode_section = input("Insert timecodes here: ")
         section = timecode_section
         timecode_section = timecode_section.split(" ")

@@ -1,3 +1,3 @@
 @echo off
-"C:\Users\Lucas\AppData\Local\Programs\Python\Python310\python.exe" "C:\Users\Lucas\Desktop\Personal\Timecode_Calculator\main.py"
+"C:\Users\ltapi\AppData\Local\Programs\Python\Python37-32\python.exe" "C:\Users\ltapi\Desktop\Projects\Timecode_Calculator\main.py"
 pause
